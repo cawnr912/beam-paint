@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "decals/beampaint/blue"
+	"$decal" "1"
+	"$decalscale" "0.4"
+	"$translucent" "1"
+}
