@@ -1019,7 +1019,32 @@ int Paint_Send(PaintSegment seg, float life, int[] clients, int count)
 
 void Paint_SendBeam(const float a[3], const float b[3], int sprite, float life, float width, const int color[4], int[] clients, int count)
 {
-	TE_SetupBeamPoints(a, b, sprite, 0, 0, 0, life, width, width, 0, 0.0, color, 0);
+	// BeamPoints is culled when its box reaches solid world behind a flat ramp.
+	// BeamEntPoint with raw entity indices 0 uses these points without that cull.
+	if (g_hPaintBeamTE.BoolValue)
+	{
+		TE_Start("BeamEntPoint");
+		TE_WriteNum("m_nStartEntity", 0);
+		TE_WriteNum("m_nEndEntity", 0);
+		TE_WriteVector("m_vecStartPoint", a);
+		TE_WriteVector("m_vecEndPoint", b);
+		TE_WriteNum("m_nModelIndex", sprite);
+		TE_WriteNum("m_nHaloIndex", 0);
+		TE_WriteNum("m_nStartFrame", 0);
+		TE_WriteNum("m_nFrameRate", 0);
+		TE_WriteFloat("m_fLife", life);
+		TE_WriteFloat("m_fWidth", width);
+		TE_WriteFloat("m_fEndWidth", width);
+		TE_WriteFloat("m_fAmplitude", 0.0);
+		TE_WriteNum("r", color[0]);
+		TE_WriteNum("g", color[1]);
+		TE_WriteNum("b", color[2]);
+		TE_WriteNum("a", color[3]);
+		TE_WriteNum("m_nSpeed", 0);
+		TE_WriteNum("m_nFadeLength", 0);
+	}
+	else
+		TE_SetupBeamPoints(a, b, sprite, 0, 0, 0, life, width, width, 0, 0.0, color, 0);
 	TE_WriteNum("m_nFlags", g_hPaintBeamFlags.IntValue);
 	TE_Send(clients, count);
 }

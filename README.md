@@ -74,6 +74,7 @@ The server cannot remove decals already drawn by a client. After clearing decals
 | `sm_beampaint_tempents` | 256 | Sets the engine's hidden `sv_multiplayer_maxtempentities` (see below). 0 = leave it alone |
 | `sm_beampaint_material` | `materials/beampaint/paintbeam.vmt` | Beam material. Changes take effect next map |
 | `sm_beampaint_beam_flags` | 0 | Beam flag test value. CS:GO ignores it |
+| `sm_beampaint_beam_te` | 1 | Send beams as BeamEntPoint temp entities. BeamPoints can drop strokes down flat world-brush ramps when their bounding box reaches solid world. 0 = old BeamPoints |
 | `sm_beampaint_debug` | 0 | 1 or 2: logs to `logs/beampaint_debug.log` |
 
 ## How it works

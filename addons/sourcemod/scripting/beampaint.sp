@@ -11,7 +11,7 @@
 #include <sdktools>
 #include <colorvariables>
 
-#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_VERSION "1.0.1"
 #define PAINT_DEFAULT_MATERIAL "materials/beampaint/paintbeam.vmt"
 #define PAINT_DEFAULT_TEXTURE "materials/beampaint/white.vtf"
 
@@ -52,6 +52,7 @@ ConVar g_hPaintPvsPeriod;
 ConVar g_hPaintPvsMaxCalls;
 ConVar g_hPaintMaterial;
 ConVar g_hPaintBeamFlags;
+ConVar g_hPaintBeamTE;
 ConVar g_hPaintFlag;
 ConVar g_hPaintEdgeAngle;
 ConVar g_hPaintEdgeSnap;
@@ -105,6 +106,7 @@ public void OnPluginStart()
 	g_hPaintPvsMaxCalls = CreateConVar("sm_beampaint_pvs_max_calls", "192", "sm_beampaint_pvs: max engine PVS tests per tick; more paint then makes the check cycle longer instead of the tick heavier", FCVAR_NOTIFY, true, 8.0, true, 4096.0);
 	g_hPaintMaterial = CreateConVar("sm_beampaint_material", PAINT_DEFAULT_MATERIAL, "Paint beam material path; takes effect on the next map", FCVAR_NOTIFY);
 	g_hPaintBeamFlags = CreateConVar("sm_beampaint_beam_flags", "0", "Paint beam flags test value; ignored by CS:GO BeamPoints rendering", FCVAR_NOTIFY, true, 0.0, true, 65535.0);
+	g_hPaintBeamTE = CreateConVar("sm_beampaint_beam_te", "1", "Beams: 1 = BeamEntPoint temp entity (not culled by solid behind flat ramps), 0 = old BeamPoints", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	g_hPaintEdgeAngle = CreateConVar("sm_beampaint_edge_angle", "20.0", "Two samples on faces whose normals differ by more than this (degrees) snap the stroke to the edge between them (ramp spines); 0 = off", FCVAR_NOTIFY, true, 0.0, true, 179.0);
 	g_hPaintEdgeSnap = CreateConVar("sm_beampaint_edge_snap", "8.0", "Aim within this many units of an edge snaps to it; 0 = off", FCVAR_NOTIFY, true, 0.0, true, 64.0);
 	g_hPaintGrazeAngle = CreateConVar("sm_beampaint_graze_angle", "4.0", "Skip samples where the aim meets the surface at less than this many degrees (they jump along it); 0 = off", FCVAR_NOTIFY, true, 0.0, true, 45.0);

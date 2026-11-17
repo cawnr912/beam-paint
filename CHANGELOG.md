@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 (2026-11-17)
+- Fix: Beam/Laser strokes running down flat world-brush ramps (e.g. surf_elysium5) mostly vanished. Beams are now sent as BeamEntPoint (`sm_beampaint_beam_te`, default 1).
+- CS:S check on surf_kitsune2: BeamEntPoint draws, but the known view-dependent static-prop ramp occlusion remains.
+
 ## 1.0.0 (2026-11-17)
 - Standalone copy of the surftimer-gf paint, as of rc144 (master e38414ac).
 - Its own MySQL connection ("beampaint" entry, else "default") and its own tables `beampaint_options` / `beampaint_segments`, with the same columns as ck_paint_*.
